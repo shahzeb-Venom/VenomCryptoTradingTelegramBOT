@@ -1,0 +1,351 @@
+# ⚙️ Configuration Guide
+
+Complete guide to configuring your Venom Crypto Trading Bot.
+
+## 🔑 Required Configuration
+
+### 1. API_ID and API_HASH
+
+**What:** Telegram API credentials  
+**Where to get:** https://my.telegram.org  
+**Format:** 
+- API_ID: Number (e.g., `12345678`)
+- API_HASH: String (e.g., `1a2b3c4d5e6f7890abcdef`)
+
+**How to get:**
+1. Visit https://my.telegram.org/auth
+2. Enter your phone number
+3. Enter verification code from Telegram
+4. Click "API Development Tools"
+5. Fill in the form:
+   - App title: `Venom Bot` (or any name)
+   - Short name: `venombot` (or any short name)
+   - Platform: `Other`
+6. Click "Create application"
+7. Copy `api_id` and `api_hash`
+
+### 2. BOT_TOKEN
+
+**What:** Your bot's unique identifier  
+**Where to get:** @BotFather on Telegram  
+**Format:** `110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`
+
+**How to get:**
+1. Open Telegram
+2. Search for `@BotFather`
+3. Send `/newbot` command
+4. Enter bot name: `Your Bot Name`
+5. Enter username: `your_bot_username_bot` (must end with 'bot')
+6. Copy the token provided
+
+**Set bot commands (optional):**
+1. Send `/setcommands` to @BotFather
+2. Select your bot
+3. Send:
+```
+start - Start the bot
+menu - Show main menu
+```
+
+### 3. YOUR_CHANNEL_ID
+
+**What:** Your Telegram channel's unique ID  
+**Where to get:** @userinfobot  
+**Format:** `-1001234567890` (must start with minus sign)
+
+**How to get:**
+1. Create a Telegram channel (or use existing)
+2. Add your bot as administrator:
+   - Go to channel settings
+   - Administrators → Add Administrator
+   - Search for your bot
+   - Grant "Post Messages" permission
+3. Forward any message from your channel to @userinfobot
+4. Bot will reply with channel info including ID
+5. Copy the ID (including the minus sign)
+
+### 4. SOURCE_CHANNELS
+
+**What:** List of channels to monitor for signals  
+**Format:** Comma-separated channel IDs or usernames
+
+**Examples:**
+```bash
+# Using channel IDs (recommended)
+SOURCE_CHANNELS=-1002529586843,-1002148968919,-1001263225860
+
+# Using channel usernames
+SOURCE_CHANNELS=@cryptosignals,@tradingview,@btcwhales
+
+# Mixed format
+SOURCE_CHANNELS=-1002529586843,@tradingview,-1001263225860
+```
+
+**How to get channel IDs:**
+1. Forward any message from the channel to @userinfobot
+2. Copy the channel ID provided
+
+**Note:** Your bot must be a member of these channels or they must be public.
+
+---
+
+## 🎨 Optional Configuration
+
+### 5. CHANNEL_NAMES (Optional)
+
+**What:** Human-readable names for source channels  
+**Format:** `channel_id:Display Name,channel_id:Display Name`
+
+**Example:**
+```bash
+CHANNEL_NAMES=-1002529586843:Evening Trader Group,-1002148968919:Learn 2 Trade,-1001263225860:Crypto Signals Pro
+```
+
+**Purpose:** Shows friendly names in posted signals instead of channel IDs
+
+### 6. PHONE_NUMBER (Optional)
+
+**What:** Your phone number for user authentication  
+**Format:** `+countrycode` + `number` (no spaces or dashes)
+
+**Example:**
+```bash
+PHONE_NUMBER=+1234567890
+```
+
+**When needed:**
+- If you want bot to join channels automatically
+- For advanced channel management features
+- Most users don't need this
+
+**Important:** Include country code with plus sign
+
+---
+
+## 📝 Setting Up in Replit
+
+### Method: Using Secrets (Recommended)
+
+1. Open your Repl in Replit
+2. Click **"Tools"** in left sidebar
+3. Click **"Secrets"** (lock icon)
+4. Add each secret:
+
+#### Add API_ID
+- Click "Add new secret"
+- Key: `API_ID`
+- Value: `12345678` (your actual API ID)
+- Click "Add new secret"
+
+#### Add API_HASH
+- Key: `API_HASH`
+- Value: `1a2b3c4d5e6f...` (your actual hash)
+- Click "Add new secret"
+
+#### Add BOT_TOKEN
+- Key: `BOT_TOKEN`
+- Value: `110201543:AAH...` (your bot token)
+- Click "Add new secret"
+
+#### Add YOUR_CHANNEL_ID
+- Key: `YOUR_CHANNEL_ID`
+- Value: `-1001234567890` (with minus sign)
+- Click "Add new secret"
+
+#### Add SOURCE_CHANNELS
+- Key: `SOURCE_CHANNELS`
+- Value: `-1002529586843,-1002148968919` (your channels)
+- Click "Add new secret"
+
+#### Add CHANNEL_NAMES (Optional)
+- Key: `CHANNEL_NAMES`
+- Value: `-1002529586843:Channel One,-1002148968919:Channel Two`
+- Click "Add new secret"
+
+#### Add PHONE_NUMBER (Optional)
+- Key: `PHONE_NUMBER`
+- Value: `+1234567890`
+- Click "Add new secret"
+
+---
+
+## ✅ Configuration Checklist
+
+Before running the bot:
+
+- [ ] API_ID obtained from my.telegram.org
+- [ ] API_HASH obtained from my.telegram.org
+- [ ] BOT_TOKEN obtained from @BotFather
+- [ ] YOUR_CHANNEL_ID obtained from @userinfobot
+- [ ] Bot added as admin to your channel
+- [ ] Bot has "Post Messages" permission
+- [ ] SOURCE_CHANNELS list prepared
+- [ ] All required secrets added in Replit
+- [ ] Optional secrets added (if needed)
+
+---
+
+## 🔍 Verification
+
+### Check Your Configuration
+
+**In Replit Console:**
+```python
+# The bot will log on startup:
+✅ Keep-alive server started
+✅ Posted menu to channel
+🚀 Bot is running and monitoring channels...
+📡 Monitoring X signal channels
+📢 Posting to channel: -1001234567890
+```
+
+**If you see errors:**
+- `Missing required environment variables` → Check all secrets are added
+- `Invalid API_ID or API_HASH` → Verify credentials from my.telegram.org
+- `Can't post to channel` → Check bot is admin with post permission
+- `Can't access channel` → Verify channel IDs are correct
+
+---
+
+## 💡 Configuration Tips
+
+### Best Practices
+
+1. **Channel IDs vs Usernames:**
+   - Use IDs (more reliable)
+   - Usernames can change
+   - IDs never change
+
+2. **Keep Secrets Safe:**
+   - Never commit to GitHub
+   - Use Replit Secrets
+   - Don't share screenshots with secrets
+
+3. **Test Configuration:**
+   - Start with one source channel
+   - Verify signals forward correctly
+   - Then add more channels
+
+4. **Channel Names:**
+   - Use short, clear names
+   - Helps identify signal sources
+   - Keep under 30 characters
+
+### Common Mistakes
+
+❌ **Don't:**
+- Add quotes around values in Replit Secrets
+- Forget minus sign in channel IDs
+- Use spaces in SOURCE_CHANNELS list
+- Share your bot token publicly
+
+✅ **Do:**
+- Double-check all IDs
+- Test with one channel first
+- Keep backup of configuration
+- Use descriptive channel names
+
+---
+
+## 🔧 Advanced Configuration
+
+### Custom Signal Patterns
+
+Edit `main.py` to customize signal detection:
+
+```python
+SIGNAL_PATTERNS = {
+    'buy': r'\b(buy|long|YOUR_WORD)\b',
+    'sell': r'\b(sell|short|YOUR_WORD)\b',
+    # ... customize other patterns
+}
+```
+
+### Custom Chart Coins
+
+Edit `CHART_MENU` in `main.py`:
+
+```python
+CHART_MENU = [
+    [Button.inline("BTC/USDT", b"chart_BTC")],
+    [Button.inline("YOUR_COIN/USDT", b"chart_YOUR_COIN")],
+    # ... add more coins
+]
+```
+
+### Custom Menu Items
+
+Add new menu options in `MAIN_MENU`:
+
+```python
+MAIN_MENU = [
+    [Button.inline("📊 Live Trading Charts", b"live_charts")],
+    [Button.inline("🆕 Your Feature", b"your_feature")],
+    # ... add more options
+]
+```
+
+Then add handler in `callback_handler()`:
+
+```python
+elif data == "your_feature":
+    await event.edit("Your feature content here")
+```
+
+---
+
+## 📞 Getting Help
+
+**Configuration Issues:**
+
+1. **Check Replit Console Logs**
+   - Shows exact error messages
+   - Indicates which config is missing
+
+2. **Verify Each Secret**
+   - Go to Tools → Secrets
+   - Check spelling and format
+   - Remove and re-add if needed
+
+3. **Test Step by Step**
+   - Add one secret at a time
+   - Run and check for errors
+   - Fix before adding next
+
+4. **Common Solutions**
+   - Restart Repl after adding secrets
+   - Check for typos in keys
+   - Verify values have no extra spaces
+
+---
+
+## 🎯 Quick Reference
+
+### Minimum Required Configuration
+
+```bash
+API_ID=12345678
+API_HASH=1a2b3c4d5e6f...
+BOT_TOKEN=110201543:AAH...
+YOUR_CHANNEL_ID=-1001234567890
+SOURCE_CHANNELS=-1002529586843,-1002148968919
+```
+
+### Full Configuration Example
+
+```bash
+# Required
+API_ID=12345678
+API_HASH=1a2b3c4d5e6f7890abcdef
+BOT_TOKEN=110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw
+YOUR_CHANNEL_ID=-1001234567890
+SOURCE_CHANNELS=-1002529586843,-1002148968919,-1001263225860
+
+# Optional
+CHANNEL_NAMES=-1002529586843:Evening Trader,-1002148968919:Learn2Trade,-1001263225860:Crypto Signals
+PHONE_NUMBER=+1234567890
+```
+
+---
+
+**Configuration complete!** Your bot is ready to run. 🚀

@@ -1,0 +1,44 @@
+# ============================================
+# VENOM CRYPTO TRADING BOT - CONFIGURATION
+# ============================================
+
+# REQUIRED: Telegram API Credentials
+# Get from: https://my.telegram.org
+API_ID=your_api_id_here
+API_HASH=your_api_hash_here
+
+# REQUIRED: Bot Token
+# Get from: @BotFather on Telegram
+BOT_TOKEN=your_bot_token_here
+
+# REQUIRED: Your Channel ID
+# Get from: Forward any message from your channel to @userinfobot
+# Format: Must include the minus sign (e.g., -1001234567890)
+YOUR_CHANNEL_ID=-1001234567890
+
+# REQUIRED: Source Channels to Monitor
+# Format: Comma-separated list of channel IDs or usernames
+# Examples:
+#   Using IDs: -1002529586843,-1002148968919,-1001263225860
+#   Using usernames: @channel1,@channel2,@channel3
+#   Mixed: -1002529586843,@channel1,-1001263225860
+SOURCE_CHANNELS=-1002529586843,-1002148968919,-1001263225860
+
+# OPTIONAL: Channel Names (for display in messages)
+# Format: channel_id:Channel Name,channel_id:Channel Name
+# Example: -1002529586843:Evening Trader,-1002148968919:Learn2Trade
+CHANNEL_NAMES=-1002529586843:Evening Trader Group,-1002148968919:Evening Trader Official
+
+# OPTIONAL: Phone Number (only if you want to use phone authentication)
+# Format: +countrycode + phone number (e.g., +1234567890)
+# Leave blank if you don't need it
+PHONE_NUMBER=
+
+# ============================================
+# NOTES:
+# ============================================
+# 1. Remove "your_" prefixes and add your actual values
+# 2. No quotes needed around values
+# 3. Channel IDs must start with minus sign (-)
+# 4. In Replit, add these as Secrets (not .env file)
+# 5. Phone number is optional - only needed for advanced features
